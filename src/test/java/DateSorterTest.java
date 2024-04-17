@@ -1,33 +1,32 @@
-package test;
+package test.java;
 
 import main.java.com.sorter.DateSorter;
 import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class DateSorterTest {
+    DateSorter sorter = new DateSorter();
 
     @Test
     void testSortDatesWithNullList() {
-
-        DateSorter sorter = new DateSorter();
-        assertThrows(IllegalArgumentException.class, () -> sorter.sortDates(null));
+        List<LocalDate> sortedDates = sorter.sortDates(null);
+        assertEquals(0, sortedDates.size());
     }
 
     @Test
     void testSortDatesWithEmptyList() {
-        DateSorter sorter = new DateSorter();
         List<LocalDate> unsortedDates = new ArrayList<>();
-        assertThrows(IllegalArgumentException.class, () -> {
-            sorter.sortDates(unsortedDates);
-        });
+        List<LocalDate> sortedDates = sorter.sortDates(unsortedDates);
+        assertEquals(0, sortedDates.size());
     }
 
     @Test
     void testSortDates() {
-        DateSorter sorter = new DateSorter();
         List<LocalDate> unsortedDates = new ArrayList<>();
         unsortedDates.add(LocalDate.of(2004, 7, 1));
         unsortedDates.add(LocalDate.of(2005, 1, 2));

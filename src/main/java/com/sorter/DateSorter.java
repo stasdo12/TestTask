@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class DateSorter {
+public class DateSorter implements DateSortingStrategy{
 
 
     /**
@@ -16,78 +16,44 @@ public class DateSorter {
      * @param unsortedDates - an unsorted list of dates
      * @return the list of dates now sorted as per the spec
      */
+    @Override
     public List<LocalDate> sortDates(List<LocalDate> unsortedDates) {
 
         if (unsortedDates == null || unsortedDates.isEmpty()) {
-            throw new IllegalArgumentException("Input list cannot be null or empty");
+            return new ArrayList<>();
         }
 
 
-        List<LocalDate> datesWithR = groupDatesWithR(unsortedDates);
+        final List<LocalDate> datesWithR = new ArrayList<>();
+        final List<LocalDate> datesWithoutR = new ArrayList<>();
 
-        List<LocalDate> datesWithoutR = groupDatesWithoutR(unsortedDates);
+        for (final LocalDate date : unsortedDates) {
+            if (containsR(date)) {
+                datesWithR.add(date);
+            } else
+                datesWithoutR.add(date);
+        }
+
+        datesWithR.sort(Comparator.naturalOrder());
+        datesWithoutR.sort(Comparator.reverseOrder());
 
 
-        Comparator<LocalDate> naturalOrderComparator = Comparator.naturalOrder();
-        Comparator<LocalDate> reverseOrderComparator = Comparator.reverseOrder();
-
-
-        datesWithR.sort(naturalOrderComparator);
-
-        datesWithoutR.sort(reverseOrderComparator);
-
-
-        List<LocalDate> sortedDates = new ArrayList<>(datesWithR);
+        final List<LocalDate> sortedDates = new ArrayList<>(datesWithR);
         sortedDates.addAll(datesWithoutR);
 
         return sortedDates;
     }
 
     /**
-     * Groups dates with 'r' in the month.
+     * Checks if the given date's month contains the letter 'r' (case-insensitive).
      *
-     * @param dates - a list of dates
-     * @return the list of dates with 'r' in the month
+     * @param date - the date to check
+     * @return true if the month contains 'r', false otherwise
      */
-    private List<LocalDate> groupDatesWithR(List<LocalDate> dates) {
-        List<LocalDate> datesWithR = new ArrayList<>();
-        for (LocalDate date : dates) {
-            if (date.getMonth().toString().toLowerCase().contains("r")) {
-                datesWithR.add(date);
-            }
-        }
-        return datesWithR;
+
+    private boolean containsR(LocalDate date) {
+        return date.getMonth().toString().toLowerCase().contains("r");
     }
 
-    /**
-     * Groups dates without 'r' in the month.
-     *
-     * @param dates - a list of dates
-     * @return the list of dates without 'r' in the month
-     */
-    private List<LocalDate> groupDatesWithoutR(List<LocalDate> dates) {
-        List<LocalDate> datesWithoutR = new ArrayList<>();
-        for (LocalDate date : dates) {
-            if (!date.getMonth().toString().toLowerCase().contains("r")) {
-                datesWithoutR.add(date);
-            }
-        }
-        return datesWithoutR;
-    }
 
-    public static void main(String[] args) {
-        List<LocalDate> unsortedDates = new ArrayList<>();
-        unsortedDates.add(LocalDate.of(2004, 7, 1));
-        unsortedDates.add(LocalDate.of(2005, 1, 2));
-        unsortedDates.add(LocalDate.of(2007, 1, 1));
-        unsortedDates.add(LocalDate.of(2032, 5, 3));
-
-        DateSorter sorter = new DateSorter();
-        List<LocalDate> sortedDates = sorter.sortDates(unsortedDates);
-
-        System.out.println("Sorted dates:");
-        for (LocalDate date : sortedDates) {
-            System.out.println(date);
-        }
-    }
 }
