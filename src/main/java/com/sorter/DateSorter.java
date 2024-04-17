@@ -1,3 +1,5 @@
+package main.java.com.sorter;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,25 +17,25 @@ public class DateSorter {
      * @return the list of dates now sorted as per the spec
      */
     public List<LocalDate> sortDates(List<LocalDate> unsortedDates) {
-        // Check if the input list is null or empty
+
         if (unsortedDates == null || unsortedDates.isEmpty()) {
             throw new IllegalArgumentException("Input list cannot be null or empty");
         }
 
-        // Group dates based on the presence of 'r' in the month
+
         List<LocalDate> datesWithR = groupDatesWithR(unsortedDates);
         List<LocalDate> datesWithoutR = groupDatesWithoutR(unsortedDates);
 
-        // Define comparators for sorting
+
         Comparator<LocalDate> naturalOrderComparator = Comparator.naturalOrder();
         Comparator<LocalDate> reverseOrderComparator = Comparator.reverseOrder();
 
-        // Sort dates with 'r' using natural order
+
         datesWithR.sort(naturalOrderComparator);
-        // Sort dates without 'r' using reverse order
+
         datesWithoutR.sort(reverseOrderComparator);
 
-        // Combine sorted dates
+
         List<LocalDate> sortedDates = new ArrayList<>(datesWithR);
         sortedDates.addAll(datesWithoutR);
 

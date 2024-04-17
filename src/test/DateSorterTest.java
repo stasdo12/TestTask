@@ -1,3 +1,6 @@
+package test;
+
+import main.java.com.sorter.DateSorter;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,9 +12,7 @@ public class DateSorterTest {
     @Test
     void testSortDatesWithNullList() {
         DateSorter sorter = new DateSorter();
-        assertThrows(IllegalArgumentException.class, () -> {
-            sorter.sortDates(null);
-        });
+        assertThrows(IllegalArgumentException.class, () -> sorter.sortDates(null));
     }
 
     @Test
