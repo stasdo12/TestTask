@@ -1,4 +1,4 @@
-package main.java.com.sorter;
+package com.sorter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class DateSortRunner {
         unsortedDates.add(LocalDate.of(2007, 1, 1));
         unsortedDates.add(LocalDate.of(2032, 5, 3));
 
-        DateSorter sorter = new DateSorter();
+        DateSorter sorter = new DateSorterImpl();
         List<LocalDate> sortedDates = sorter.sortDates(unsortedDates);
 
         System.out.println("Sorted dates:");
