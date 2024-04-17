@@ -24,6 +24,7 @@ public class DateSorter {
 
 
         List<LocalDate> datesWithR = groupDatesWithR(unsortedDates);
+
         List<LocalDate> datesWithoutR = groupDatesWithoutR(unsortedDates);
 
 

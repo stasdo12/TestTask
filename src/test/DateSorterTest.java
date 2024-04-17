@@ -11,6 +11,7 @@ public class DateSorterTest {
 
     @Test
     void testSortDatesWithNullList() {
+
         DateSorter sorter = new DateSorter();
         assertThrows(IllegalArgumentException.class, () -> sorter.sortDates(null));
     }
