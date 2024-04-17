@@ -1,16 +1,16 @@
-package test.java;
+package com.sorter;
 
-import main.java.com.sorter.DateSorter;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class DateSorterTest {
-    DateSorter sorter = new DateSorter();
+    private final DateSorter sorter = new DateSorterImpl();
 
     @Test
     void testSortDatesWithNullList() {
