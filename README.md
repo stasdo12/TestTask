@@ -7,15 +7,14 @@ This class is designed to sort a list of dates and group them based on the prese
 #### `sortDates(List<LocalDate> unsortedDates)`
 
 Takes an unsorted list of dates as input and returns a sorted list of dates according to the specified order.
+#### `containsR(LocalDate date)`
 
-#### `groupDatesWithR(List<LocalDate> dates)`
+This method checks whether the month name of a given `LocalDate` object contains the letter 'r' (case-insensitive).
 
-Takes a list of dates as input and returns a list of dates containing the letter 'r' in the month name.
+## Method Signature
 
-#### `groupDatesWithoutR(List<LocalDate> dates)`
-
-Takes a list of dates as input and returns a list of dates not containing the letter 'r' in the month name.
-
+```java
+private boolean containsR(LocalDate date)
 ### Usage
 
 Example of using the `DateSorter` class:
